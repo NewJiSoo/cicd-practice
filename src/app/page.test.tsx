@@ -10,5 +10,6 @@ describe("Page", () => {
     expect(
       screen.getByText("Save and see your changes instantly.")
     ).toBeInTheDocument();
+    expect(screen.getByText("결과 나오냐?")).toBeInTheDocument();
   });
 });
