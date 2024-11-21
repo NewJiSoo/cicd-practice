@@ -6,20 +6,8 @@ export default function Home() {
           <li className="mb-2">Get started by editing</li>
           <li>Save and see your changes instantly.</li>
         </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          Deploy now
-        </div>
+        <div>테스트 중!!!</div>
       </main>
-      {/* <button
-        type="button"
-        onClick={() => {
-          throw new Error("Sentry Frontend Error");
-        }}
-      >
-        Throw error
-      </button> */}
-      ;
     </div>
   );
 }
