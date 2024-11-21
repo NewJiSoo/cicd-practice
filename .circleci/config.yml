@@ -47,16 +47,16 @@ jobs:
       # Replace this with steps to deploy to users
       - run:
           name: deploy
-          command: '#e.g. ./deploy.sh'
+          command: "#e.g. ./deploy.sh"
       - run:
           name: found github actions config
-          command: ':'
+          command: ":"
 workflows:
   build-and-test:
     jobs:
-      - cypress/run
-          start-command: 'npm run start'
-        
+      - cypress/run:
+          start-command: "npm run start"
+
       # - test-node
       - build-node:
           requires:
