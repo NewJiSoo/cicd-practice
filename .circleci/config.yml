@@ -2,7 +2,7 @@
 # Stacks detected: cicd:github-actions:.github/workflows,deps:node:.,test:jest:
 version: 2.1
 orbs:
-  node: circleci/node@5
+  cypress: cypress-io/cypress@3
 jobs:
   test-node:
     # Install node dependencies and run tests
@@ -54,7 +54,10 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - test-node
+      - cypress/run
+        start-command: 'npm run start'
+        
+      # - test-node
       - build-node:
           requires:
             - test-node
