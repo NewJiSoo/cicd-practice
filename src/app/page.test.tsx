@@ -6,5 +6,6 @@ describe("Page", () => {
   it("renders the page", () => {
     render(<Home />);
     expect(screen.getByText("Get started by editing")).toBeInTheDocument();
+    expect(screen.getByText("테스트 중!!!")).toBeInTheDocument();
   });
 });
