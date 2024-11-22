@@ -8,8 +8,6 @@ executors:
     parameters:
       node-version:
         default: 18.16.1
-    docker:
-      - image: circleci/node:18.17.0
 
 jobs:
   cypress-run:
