@@ -28,7 +28,7 @@ jobs:
           command: |
             npx wait-on http://localhost:3000 # 서버가 실행될 때까지 대기
       - cypress/run:
-          start-command: "npm run start" # Cypress 테스트 실행
+          start-command: npm run start # Cypress 테스트 실행
 
 workflows:
   build:
