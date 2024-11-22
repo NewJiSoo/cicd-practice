@@ -3,10 +3,14 @@ orbs:
   cypress: cypress-io/cypress@3
   node: circleci/node@4.0
 
+  executors:
+    default:
+      docker:
+        - image: cimg/node:18.17.0
+
 jobs:
   cypress-run:
-    docker:
-      - image: cimg/node:18.17.0
+    executor: default
     steps:
       - checkout
       - run:
