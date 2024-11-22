@@ -5,8 +5,9 @@ orbs:
 
 executors:
   default:
-    docker:
-      - image: cimg/node:18.17.0
+    parameters:
+      node-version:
+        default: 18.16.1
 
 jobs:
   cypress-run:
