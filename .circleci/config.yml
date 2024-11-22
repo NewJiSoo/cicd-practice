@@ -3,6 +3,8 @@
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@3
+  node: circleci/node@4.0
+
 # jobs:
 #   test-node:
 #     # Install node dependencies and run tests
