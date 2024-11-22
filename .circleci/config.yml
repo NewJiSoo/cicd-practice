@@ -8,6 +8,8 @@ executors:
     parameters:
       node-version:
         default: 18.16.1
+    docker:
+      - image: circleci/node:18.17.0
 
 jobs:
   cypress-run:
@@ -29,7 +31,7 @@ jobs:
           command: |
             npx wait-on http://localhost:3000
       - cypress/run:
-          start-command: npm run start # Cypress 테스트 실행
+        start-command: npm run start
 
 workflows:
   build:
