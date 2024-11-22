@@ -5,64 +5,33 @@ orbs:
   cypress: cypress-io/cypress@3
   node: circleci/node@4.0
 
-# jobs:
-#   test-node:
-#     # Install node dependencies and run tests
-#     executor: node/default
-#     environment:
-#       JEST_JUNIT_OUTPUT_DIR: ./test-results/
-#     steps:
-#       - checkout
-#       - node/install-packages:
-#           pkg-manager: npm
-#       - run:
-#           command: npm install jest-junit
-#       - run:
-#           name: Run tests
-#           command: npm run test --ci --runInBand --reporters=default --reporters=jest-junit
-#       - store_test_results:
-#           path: ./test-results/
-#   build-node:
-#     # Build node project
-#     executor: node/default
-#     steps:
-#       - checkout
-#       - node/install-packages:
-#           pkg-manager: npm
-#       - run:
-#           command: npm run build
-#       - run:
-#           name: Create the ~/artifacts directory if it doesn't exist
-#           command: mkdir -p ~/artifacts
-#       # Copy output to artifacts dir
-#       - run:
-#           name: Copy artifacts
-#           command: cp -R build dist public .output .next .docusaurus ~/artifacts 2>/dev/null || true
-#       - store_artifacts:
-#           path: ~/artifacts
-#           destination: node-build
-#   deploy:
-#     # This is an example deploy job, not actually used by the workflow
-#     docker:
-#       - image: cimg/base:stable
-#     steps:
-#       # Replace this with steps to deploy to users
-#       - run:
-#           name: deploy
-#           command: "#e.g. ./deploy.sh"
-#       - run:
-#           name: found github actions config
-#           command: ":"
+jobs:
+  cypress-run:
+    executor:
+      name: node/default
+      tag: "18.17.0"
+    steps:
+      - checkout
+      - run:
+          name: Node.js 버전 확인
+          command: node -v # Node.js 버전 확인
+      - run:
+          name: 의존성 설치
+          command: npm install # npm 의존성 설치
+      - run:
+          name: 프로덕션 빌드 및 서버 실행
+          command: |
+            npm run build && npm run start &
+          # 백그라운드에서 서버 실행
+      - run:
+          name: Cypress가 서버가 실행될 때까지 기다리기
+          command: |
+            npx wait-on http://localhost:3000
+          # 서버가 로컬에서 실행될 때까지 기다림
+      - cypress/run:
+          start-command: "npm run start" # Cypress 테스트 실행
+
 workflows:
   build:
     jobs:
-      - cypress/run:
-          start-command: "npm run start"
-
-      # - test-node
-      # - build-node:
-      #     requires:
-      #       - test-node
-    # - deploy:
-    #     requires:
-    #       - build-node
+      - cypress-run

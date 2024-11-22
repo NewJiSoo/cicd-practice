@@ -1,6 +1,6 @@
 describe("홈 페이지 앵커 링크", () => {
   beforeEach(() => {
-    cy.visit("/"); // baseUrl이 설정되어 있으면 루트 경로로 접속
+    cy.visit("http://localhost:3000"); // baseUrl이 설정되어 있으면 루트 경로로 접속
   });
 
   it("앵커 링크의 href 속성을 확인합니다.", () => {
