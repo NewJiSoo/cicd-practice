@@ -7,6 +7,7 @@ export default function Home() {
           <li>Save and see your changes instantly.</li>
         </ol>
         <div>테스트 중!!!</div>
+        <div>결과 나오냐?</div>
       </main>
     </div>
   );
