@@ -23,11 +23,11 @@ jobs:
       - run:
           name: 프로덕션 빌드 및 서버 실행
           command: |
-            npm run build && npm run start & # 백그라운드에서 서버 실행
+            npm run build && npm run start &
       - run:
           name: Cypress가 서버가 실행될 때까지 기다리기
           command: |
-            npx wait-on http://localhost:3000 # 서버가 실행될 때까지 대기
+            npx wait-on http://localhost:3000
       - cypress/run:
           start-command: npm run start # Cypress 테스트 실행
 
