@@ -3,33 +3,16 @@ orbs:
   cypress: cypress-io/cypress@3
   node: circleci/node@4.0
 
-executors:
-  default:
-    parameters:
-      node-version:
-        default: 18.16.1
-
 jobs:
   cypress-run:
-    executor: default
+    executor:
+      name: cypress/default
+      node-version: "20.6"
     steps:
-      - checkout
-      - run:
-          name: Node.js 버전 확인
-          command: node -v # Node.js 버전 확인
-      - run:
-          name: 의존성 설치
-          command: npm install # npm 의존성 설치
-      - run:
-          name: 프로덕션 빌드 및 서버 실행
-          command: |
-            npm run build && npm run start &
-      - run:
-          name: Cypress가 서버가 실행될 때까지 기다리기
-          command: |
-            npx wait-on http://localhost:3000
-      - cypress/run:
-        start-command: npm run start
+      - cypress/install
+      - cypress/run-tests:
+          cypress-command: "npx wait-on@latest http://localhost:3000 && npx cypress run"
+          start-command: "npm run build && npm run start"
 
 workflows:
   build:
