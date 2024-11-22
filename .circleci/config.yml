@@ -1,5 +1,3 @@
-# This config was automatically generated from your source code
-# Stacks detected: cicd:github-actions:.github/workflows,deps:node:.,test:jest:
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@3
@@ -7,9 +5,8 @@ orbs:
 
 jobs:
   cypress-run:
-    executor:
-      name: node/default
-      tag: "18.17.0"
+    docker:
+      - image: cimg/node:18.17.0
     steps:
       - checkout
       - run:
@@ -22,12 +19,10 @@ jobs:
           name: 프로덕션 빌드 및 서버 실행
           command: |
             npm run build && npm run start &
-          # 백그라운드에서 서버 실행
       - run:
           name: Cypress가 서버가 실행될 때까지 기다리기
           command: |
             npx wait-on http://localhost:3000
-          # 서버가 로컬에서 실행될 때까지 기다림
       - cypress/run:
           start-command: "npm run start" # Cypress 테스트 실행
 
